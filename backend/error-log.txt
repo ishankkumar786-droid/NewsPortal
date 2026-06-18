@@ -1,0 +1,183 @@
+[POST] /api/v1/articles/6a2e7ececf86b882a3f8c8e4/featured-image >> StatusCode:: 400, Message:: No image file provided
+[GET] /api/v1/users >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/articles >> StatusCode:: 400, Message:: Validation failed
+[POST] /api/v1/articles/6a2e7ececf86b882a3f8c8e4/featured-image >> StatusCode:: 403, Message:: You cannot edit an article that has been submitted
+[POST] /api/v1/articles >> StatusCode:: 400, Message:: Validation failed
+[POST] /api/v1/articles/6a2e7ececf86b882a3f8c8e4/featured-image >> StatusCode:: 403, Message:: You cannot edit an article that has been submitted
+[POST] /api/v1/articles >> StatusCode:: 401, Message:: Access token has expired
+[POST] /api/v1/auth/refresh-token >> StatusCode:: 401, Message:: Invalid refresh token. Please login again.
+[GET] /api/v1/analytics/dashboard >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/most-viewed >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/views-over-time >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/categories >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/articles >> StatusCode:: 400, Message:: Validation failed
+[GET] /api/v1/articles >> StatusCode:: 400, Message:: Validation failed
+[GET] /api/v1/articles >> StatusCode:: 400, Message:: Validation failed
+[GET] /api/v1/articles >> StatusCode:: 400, Message:: Validation failed
+[GET] /api/v1/articles >> StatusCode:: 400, Message:: Validation failed
+[GET] /api/v1/articles >> StatusCode:: 400, Message:: Validation failed
+[GET] /api/v1/articles >> StatusCode:: 400, Message:: Validation failed
+[GET] /api/v1/articles >> StatusCode:: 400, Message:: Validation failed
+[POST] /api/v1/articles >> StatusCode:: 401, Message:: Access token is required
+[GET] /api/v1/analytics/dashboard >> StatusCode:: 401, Message:: Access token is required
+[GET] /api/v1/analytics/views-over-time >> StatusCode:: 401, Message:: Access token is required
+[GET] /api/v1/analytics/most-viewed >> StatusCode:: 401, Message:: Access token is required
+[GET] /api/v1/analytics/categories >> StatusCode:: 401, Message:: Access token is required
+[GET] /api/v1/analytics/dashboard >> StatusCode:: 401, Message:: Access token is required
+[GET] /api/v1/analytics/views-over-time >> StatusCode:: 401, Message:: Access token is required
+[GET] /api/v1/analytics/most-viewed >> StatusCode:: 401, Message:: Access token is required
+[GET] /api/v1/analytics/categories >> StatusCode:: 401, Message:: Access token is required
+[GET] /api/v1/analytics/my-stats >> StatusCode:: 401, Message:: Access token is required
+[GET] /api/v1/users >> StatusCode:: 401, Message:: Access token is required
+[GET] /api/v1/analytics/dashboard >> StatusCode:: 401, Message:: Access token is required
+[GET] /api/v1/analytics/views-over-time >> StatusCode:: 401, Message:: Access token is required
+[GET] /api/v1/analytics/most-viewed >> StatusCode:: 401, Message:: Access token is required
+[GET] /api/v1/analytics/categories >> StatusCode:: 401, Message:: Access token is required
+[GET] /api/v1/analytics/my-stats >> StatusCode:: 401, Message:: Access token is required
+[GET] /api/v1/analytics/dashboard >> StatusCode:: 401, Message:: Access token is required
+[GET] /api/v1/analytics/views-over-time >> StatusCode:: 401, Message:: Access token is required
+[GET] /api/v1/analytics/most-viewed >> StatusCode:: 401, Message:: Access token is required
+[GET] /api/v1/analytics/categories >> StatusCode:: 401, Message:: Access token is required
+[POST] /api/v1/articles >> StatusCode:: 401, Message:: Access token is required
+[GET] /api/v1/analytics/dashboard >> StatusCode:: 401, Message:: Access token is required
+[GET] /api/v1/analytics/views-over-time >> StatusCode:: 401, Message:: Access token is required
+[GET] /api/v1/analytics/most-viewed >> StatusCode:: 401, Message:: Access token is required
+[GET] /api/v1/analytics/categories >> StatusCode:: 401, Message:: Access token is required
+[POST] /api/v1/auth/refresh-token >> StatusCode:: 401, Message:: Refresh token is required
+[POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Invalid email or password
+[GET] /api/v1/analytics/my-stats >> StatusCode:: 401, Message:: Access token is required
+[GET] /api/v1/analytics/my-stats >> StatusCode:: 401, Message:: Access token has expired
+[POST] /api/v1/auth/refresh-token >> StatusCode:: 401, Message:: Refresh token is required
+[GET] /api/v1/analytics/my-stats >> StatusCode:: 401, Message:: Access token is required
+[GET] /api/v1/analytics/dashboard >> StatusCode:: 401, Message:: Access token is required
+[GET] /api/v1/analytics/views-over-time >> StatusCode:: 401, Message:: Access token is required
+[GET] /api/v1/analytics/most-viewed >> StatusCode:: 401, Message:: Access token is required
+[GET] /api/v1/analytics/categories >> StatusCode:: 401, Message:: Access token is required
+[POST] /api/v1/auth/refresh-token >> StatusCode:: 401, Message:: Refresh token is required
+[GET] /api/v1/analytics/dashboard >> StatusCode:: 401, Message:: Access token is required
+[GET] /api/v1/analytics/views-over-time >> StatusCode:: 401, Message:: Access token is required
+[GET] /api/v1/analytics/most-viewed >> StatusCode:: 401, Message:: Access token is required
+[GET] /api/v1/analytics/categories >> StatusCode:: 401, Message:: Access token is required
+[POST] /api/v1/auth/refresh-token >> StatusCode:: 401, Message:: Refresh token is required
+[GET] /api/v1/articles/slug/auyketvrycejquixqq >> StatusCode:: 404, Message:: Article not found
+[GET] /api/v1/analytics/dashboard >> StatusCode:: 401, Message:: Access token is required
+[GET] /api/v1/analytics/views-over-time >> StatusCode:: 401, Message:: Access token is required
+[GET] /api/v1/analytics/most-viewed >> StatusCode:: 401, Message:: Access token is required
+[GET] /api/v1/analytics/categories >> StatusCode:: 401, Message:: Access token is required
+[POST] /api/v1/auth/refresh-token >> StatusCode:: 401, Message:: Refresh token is required
+[GET] /api/v1/articles/slug/auyketvrycejquixqq >> StatusCode:: 404, Message:: Article not found
+[GET] /api/v1/analytics/dashboard >> StatusCode:: 401, Message:: Access token is required
+[GET] /api/v1/analytics/most-viewed >> StatusCode:: 401, Message:: Access token is required
+[GET] /api/v1/analytics/views-over-time >> StatusCode:: 401, Message:: Access token is required
+[GET] /api/v1/analytics/categories >> StatusCode:: 401, Message:: Access token is required
+[POST] /api/v1/auth/refresh-token >> StatusCode:: 401, Message:: Refresh token is required
+[GET] /api/v1/analytics/dashboard >> StatusCode:: 401, Message:: Access token is required
+[GET] /api/v1/analytics/views-over-time >> StatusCode:: 401, Message:: Access token is required
+[GET] /api/v1/analytics/most-viewed >> StatusCode:: 401, Message:: Access token is required
+[GET] /api/v1/analytics/categories >> StatusCode:: 401, Message:: Access token is required
+[POST] /api/v1/auth/refresh-token >> StatusCode:: 401, Message:: Invalid refresh token. Please login again.
+[GET] /api/v1/analytics/my-stats >> StatusCode:: 401, Message:: Access token is required
+[GET] /api/v1/analytics/my-stats >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/dashboard >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/views-over-time >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/most-viewed >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/categories >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/articles/slug/ieuwbtrcfsuncu >> StatusCode:: 404, Message:: Article not found
+[POST] /api/v1/articles/6a312db0e4e6765e73006307/publish >> StatusCode:: 400, Message:: Article must be approved before publishing
+[POST] /api/v1/articles/6a312db0e4e6765e73006307/review >> StatusCode:: 400, Message:: Article must be in submitted or pending_review status to review
+[POST] /api/v1/articles/6a312f0de4e6765e730063ed/submit >> StatusCode:: 400, Message:: Cannot submit article with status: submitted
+[POST] /api/v1/articles/6a312f0de4e6765e730063ed/review >> StatusCode:: 400, Message:: Article must be in submitted or pending_review status to review
+[POST] /api/v1/articles/6a312f0de4e6765e730063ed/publish >> StatusCode:: 400, Message:: Article must be approved before publishing
+[GET] /api/v1/analytics/dashboard >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/views-over-time >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/most-viewed >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/categories >> StatusCode:: 401, Message:: Access token has expired
+[POST] /api/v1/articles >> StatusCode:: 401, Message:: Access token has expired
+[DELETE] /api/v1/articles/6a312f0de4e6765e730063ed >> StatusCode:: 404, Message:: Article not found
+[DELETE] /api/v1/articles/6a312f0de4e6765e730063ed >> StatusCode:: 404, Message:: Article not found
+[GET] /api/v1/analytics/dashboard >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/categories >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/views-over-time >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/most-viewed >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/dashboard >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/views-over-time >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/most-viewed >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/categories >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/my-stats >> StatusCode:: 401, Message:: Access token has expired
+[POST] /api/v1/categories >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/my-stats >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/my-stats >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/views-over-time >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/most-viewed >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/dashboard >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/categories >> StatusCode:: 401, Message:: Access token has expired
+[POST] /api/v1/articles/6a3169b8694ab19f6a365e0e/review >> StatusCode:: 400, Message:: Article must be in submitted or pending_review status to review
+[POST] /api/v1/articles >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/dashboard >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/views-over-time >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/most-viewed >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/categories >> StatusCode:: 401, Message:: Access token has expired
+[POST] /api/v1/articles/6a3171f17a5e75f640e8ca37/review >> StatusCode:: 400, Message:: Article must be in submitted or pending_review status to review
+[DELETE] /api/v1/articles/6a3171f17a5e75f640e8ca37 >> StatusCode:: 401, Message:: Access token has expired
+[POST] /api/v1/articles >> StatusCode:: 401, Message:: Access token has expired
+[POST] /api/v1/articles/6a3175517a5e75f640e8cada/review >> StatusCode:: 400, Message:: Article must be in submitted or pending_review status to review
+[POST] /api/v1/articles/6a3175517a5e75f640e8cada/review >> StatusCode:: 400, Message:: Article must be in submitted or pending_review status to review
+[POST] /api/v1/articles/6a3177b57a5e75f640e8cb5c/submit >> StatusCode:: 400, Message:: Cannot submit article with status: submitted
+[GET] /api/v1/analytics/dashboard >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/views-over-time >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/most-viewed >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/categories >> StatusCode:: 401, Message:: Access token has expired
+[POST] /api/v1/articles >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/articles/slug/dkuewbfyuewchlifqw >> StatusCode:: 404, Message:: Article not found
+[POST] /api/v1/articles/6a317b147a5e75f640e8cc47/review >> StatusCode:: 400, Message:: Article must be in submitted or pending_review status to review
+[POST] /api/v1/articles/6a317b147a5e75f640e8cc47/review >> StatusCode:: 400, Message:: Article must be in submitted or pending_review status to review
+[GET] /api/v1/analytics/dashboard >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/views-over-time >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/most-viewed >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/categories >> StatusCode:: 401, Message:: Access token has expired
+[POST] /api/v1/articles >> StatusCode:: 401, Message:: Access token has expired
+[POST] /api/v1/articles/6a317de973b27fbec1d67e48/publish >> StatusCode:: 400, Message:: Article must be approved before publishing
+[GET] /api/v1/analytics/dashboard >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/views-over-time >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/most-viewed >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/categories >> StatusCode:: 401, Message:: Access token has expired
+[POST] /api/v1/articles/6a31810e42a58ba63801338c/publish >> StatusCode:: 400, Message:: Article must be approved before publishing
+[GET] /api/v1/analytics/dashboard >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/views-over-time >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/categories >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/most-viewed >> StatusCode:: 401, Message:: Access token has expired
+[DELETE] /api/v1/articles/6a31810e42a58ba63801338c >> StatusCode:: 404, Message:: Article not found
+[GET] /api/v1/analytics/my-stats >> StatusCode:: 401, Message:: Access token has expired
+[POST] /api/v1/articles/6a33de45eaca30a4b06f87cf/submit >> StatusCode:: 400, Message:: Cannot submit article with status: submitted
+[POST] /api/v1/articles/6a33de45eaca30a4b06f87cf/review >> StatusCode:: 400, Message:: Article must be in submitted or pending_review status to review
+[GET] /api/v1/analytics/dashboard >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/views-over-time >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/most-viewed >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/categories >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/dashboard >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/most-viewed >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/views-over-time >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/categories >> StatusCode:: 401, Message:: Access token has expired
+[POST] /api/v1/articles >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/dashboard >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/views-over-time >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/most-viewed >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/categories >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/my-stats >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/dashboard >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/views-over-time >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/most-viewed >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/categories >> StatusCode:: 401, Message:: Access token has expired
+[POST] /api/v1/auth/reset-password/cf4cf4cfc3042889c614a1ed7b86109ceb7676ba0bf37858e810f7e2d698bc16 >> StatusCode:: 400, Message:: Validation failed
+[POST] /api/v1/auth/reset-password/cf4cf4cfc3042889c614a1ed7b86109ceb7676ba0bf37858e810f7e2d698bc16 >> StatusCode:: 400, Message:: Validation failed
+[POST] /api/v1/auth/login >> StatusCode:: 401, Message:: Your account has been deactivated. Contact support.
+[GET] /api/v1/analytics/dashboard >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/most-viewed >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/views-over-time >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/categories >> StatusCode:: 401, Message:: Access token has expired
+[DELETE] /api/v1/articles/6a34090fda4fbf1902c791fe >> StatusCode:: 404, Message:: Article not found
+[GET] /api/v1/articles/slug/ytcrtyjhbgyuugy >> StatusCode:: 404, Message:: Article not found
+[GET] /api/v1/analytics/dashboard >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/views-over-time >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/most-viewed >> StatusCode:: 401, Message:: Access token has expired
+[GET] /api/v1/analytics/categories >> StatusCode:: 401, Message:: Access token has expired

@@ -1,0 +1,8 @@
+{
+  "name": "News Portal",
+  "short_name": "NewsPortal",
+  "icons": [],
+  "theme_color": "#e63946",
+  "background_color": "#ffffff",
+  "display": "standalone"
+}

@@ -1,0 +1,142 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 0 76% 60%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 0 76% 60%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 0 76% 60%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 0 76% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+@layer components {
+  .breaking-ticker {
+    @apply bg-news-red text-white overflow-hidden whitespace-nowrap;
+  }
+
+  .article-content {
+    @apply prose prose-lg max-w-none dark:prose-invert;
+  }
+
+  .article-content h1 { @apply text-3xl font-bold mt-8 mb-4; }
+  .article-content h2 { @apply text-2xl font-bold mt-6 mb-3; }
+  .article-content h3 { @apply text-xl font-semibold mt-5 mb-2; }
+  .article-content p { @apply mb-4 leading-relaxed; }
+  .article-content blockquote {
+    @apply border-l-4 border-news-red pl-4 italic text-muted-foreground my-6;
+  }
+  .article-content img { @apply rounded-lg my-4 w-full; }
+  .article-content a { @apply text-news-red hover:underline; }
+  .article-content ul { @apply list-disc list-inside mb-4; }
+  .article-content ol { @apply list-decimal list-inside mb-4; }
+  .article-content code { @apply bg-muted px-1.5 py-0.5 rounded text-sm font-mono; }
+  .article-content pre { @apply bg-muted p-4 rounded-lg overflow-x-auto mb-4; }
+  .article-content table { @apply w-full border-collapse mb-4; }
+  .article-content th { @apply bg-muted p-2 text-left border border-border font-semibold; }
+  .article-content td { @apply p-2 border border-border; }
+}
+
+/* Tiptap editor styles */
+.ProseMirror {
+  @apply outline-none min-h-[400px] p-4;
+}
+
+.ProseMirror p.is-editor-empty:first-child::before {
+  @apply text-muted-foreground;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+.ProseMirror h1 { @apply text-3xl font-bold my-3; }
+.ProseMirror h2 { @apply text-2xl font-bold my-2; }
+.ProseMirror h3 { @apply text-xl font-semibold my-2; }
+.ProseMirror p { @apply my-2 leading-relaxed; }
+.ProseMirror blockquote {
+  @apply border-l-4 border-primary pl-4 italic text-muted-foreground my-4;
+}
+.ProseMirror ul { @apply list-disc list-inside my-2; }
+.ProseMirror ol { @apply list-decimal list-inside my-2; }
+.ProseMirror code { @apply bg-muted px-1 py-0.5 rounded text-sm font-mono; }
+.ProseMirror pre { @apply bg-muted p-3 rounded-md overflow-x-auto my-3; }
+.ProseMirror table { @apply w-full border-collapse my-3; }
+.ProseMirror th { @apply bg-muted border border-border p-2 font-semibold text-left; }
+.ProseMirror td { @apply border border-border p-2; }
+.ProseMirror img { @apply max-w-full rounded-lg my-2; }
+.ProseMirror a { @apply text-primary underline; }
+.ProseMirror .is-empty::before {
+  content: attr(data-placeholder);
+  @apply text-muted-foreground pointer-events-none float-left h-0;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { @apply bg-transparent; }
+::-webkit-scrollbar-thumb { @apply bg-muted-foreground/30 rounded-full; }
+::-webkit-scrollbar-thumb:hover { @apply bg-muted-foreground/50; }
+
+/* Smooth scroll */
+html { scroll-behavior: smooth; }
+
+/* Focus visible */
+:focus-visible { @apply outline-2 outline-offset-2 outline-primary; }
+
+/* Print styles */
+@media print {
+  .no-print { display: none !important; }
+  .article-content { @apply text-black; }
+}

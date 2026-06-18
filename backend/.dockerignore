@@ -1,0 +1,17 @@
+node_modules
+logs
+.env
+.env.*
+.git
+.gitignore
+README.md
+dist
+src/**/*.test.ts
+src/**/*.spec.ts
+coverage
+check-*.js
+test-*.js
+get-id.js
+dummy.gif
+error-log.txt
+env.yaml
