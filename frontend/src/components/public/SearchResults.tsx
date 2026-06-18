@@ -77,7 +77,7 @@ export function SearchResults({ query, category, page }: SearchResultsProps) {
           {query ? (
             <h1 className="text-lg font-semibold">
               {isLoading ? 'Searching...' : `${pagination?.total || 0} results for `}
-              {!isLoading && query && <span className="text-news-red">"{query}"</span>}
+              {!isLoading && query && <span className="text-news-red">&quot;{query}&quot;</span>}
             </h1>
           ) : (
             <h1 className="text-lg font-semibold">All Articles</h1>
