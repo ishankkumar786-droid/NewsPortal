@@ -2,14 +2,14 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 
 export const metadata: Metadata = {
-  title: 'About Us - News Portal',
-  description: 'Learn about our mission, vision, and the team behind News Portal.',
+  title: 'About Us - KhabarPatra',
+  description: 'Learn about our mission, vision, and the team behind KhabarPatra.',
 };
 
 export default function AboutPage() {
   return (
     <div className="container mx-auto px-4 py-12 max-w-4xl">
-      <h1 className="text-4xl md:text-5xl font-bold font-serif mb-8 text-center">About News Portal</h1>
+      <h1 className="text-4xl md:text-5xl font-bold font-serif mb-8 text-center">About KhabarPatra</h1>
       
       <div className="aspect-[21/9] relative rounded-2xl overflow-hidden mb-12">
         <Image 
@@ -29,7 +29,7 @@ export default function AboutPage() {
         <section>
           <h2 className="text-3xl font-bold font-serif text-news-red">Our Mission</h2>
           <p>
-            Founded in 2026, News Portal was established with a singular mission: to provide unbiased, rapid, and comprehensive news coverage to a global audience. In an era of misinformation, we stand as a pillar of journalistic integrity, ensuring that our readers receive only verified and well-researched reporting.
+            Founded in 2026, KhabarPatra was established with a singular mission: to provide unbiased, rapid, and comprehensive news coverage to a global audience. In an era of misinformation, we stand as a pillar of journalistic integrity, ensuring that our readers receive only verified and well-researched reporting.
           </p>
         </section>
 
@@ -58,7 +58,7 @@ export default function AboutPage() {
         <section>
           <h2 className="text-3xl font-bold font-serif text-news-red">The Team</h2>
           <p>
-            Our newsroom is powered by over 50 dedicated journalists, editors, and technical experts working around the clock. From our investigative teams to our breaking news desk, every member of News Portal is committed to excellence in journalism.
+            Our newsroom is powered by over 50 dedicated journalists, editors, and technical experts working around the clock. From our investigative teams to our breaking news desk, every member of KhabarPatra is committed to excellence in journalism.
           </p>
         </section>
       </div>

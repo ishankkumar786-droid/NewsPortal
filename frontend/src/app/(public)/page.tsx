@@ -93,7 +93,9 @@ export default async function HomePage() {
       <main className="container mx-auto px-4 py-8">
         <AdBanner slot="HOME_TOP" className="mb-8" />
         
-        <HeroSection articles={featuredArticles} />
+        <div className="hidden lg:block">
+          <HeroSection articles={featuredArticles} />
+        </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-12">
           {/* Main Content Column (Left - 2/3) */}

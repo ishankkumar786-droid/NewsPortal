@@ -83,11 +83,11 @@ export function PublicHeader() {
           <Link
             href="/"
             className="flex items-center gap-2 flex-shrink-0"
-            aria-label="News Portal - Home"
+            aria-label="KhabarPatra - Home"
           >
             <Newspaper className="h-8 w-8 text-news-red" />
-            <span className="font-serif font-bold text-2xl hidden sm:block">
-              News Portal
+            <span className="font-serif font-bold text-xl sm:text-2xl">
+              KhabarPatra
             </span>
           </Link>
 

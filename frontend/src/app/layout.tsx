@@ -17,15 +17,15 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   title: {
-    default: 'News Portal — Breaking News & Latest Updates',
-    template: '%s | News Portal',
+    default: 'KhabarPatra — Breaking News & Latest Updates',
+    template: '%s | KhabarPatra',
   },
   description:
     'Get the latest breaking news, top headlines, and in-depth coverage of politics, business, sports, technology, and more.',
   keywords: ['news', 'breaking news', 'latest news', 'headlines', 'politics', 'business', 'sports'],
-  authors: [{ name: 'News Portal' }],
-  creator: 'News Portal',
-  publisher: 'News Portal',
+  authors: [{ name: 'KhabarPatra' }],
+  creator: 'KhabarPatra',
+  publisher: 'KhabarPatra',
   robots: {
     index: true,
     follow: true,
@@ -38,21 +38,21 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: process.env.NEXT_PUBLIC_SITE_URL || 'https://newsportal.com',
-    siteName: 'News Portal',
-    title: 'News Portal — Breaking News & Latest Updates',
+    siteName: 'KhabarPatra',
+    title: 'KhabarPatra — Breaking News & Latest Updates',
     description: 'Get the latest breaking news, top headlines, and in-depth coverage.',
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'News Portal',
+        alt: 'KhabarPatra',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'News Portal — Breaking News & Latest Updates',
+    title: 'KhabarPatra — Breaking News & Latest Updates',
     description: 'Get the latest breaking news and headlines.',
     creator: '@newsportal',
     images: ['/og-image.png'],

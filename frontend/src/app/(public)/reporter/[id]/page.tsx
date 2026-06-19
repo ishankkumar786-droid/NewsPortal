@@ -65,7 +65,7 @@ export default async function ReporterProfilePage(props: PageProps) {
           </div>
           
           <p className="text-muted-foreground max-w-2xl">
-            {reporter.bio || `${reporter.name} is a dedicated reporter covering various topics for News Portal, bringing insightful journalism to our readers.`}
+            {reporter.bio || `${reporter.name} is a dedicated reporter covering various topics for KhabarPatra, bringing insightful journalism to our readers.`}
           </p>
           
           <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-sm text-muted-foreground">

@@ -5,8 +5,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
 export const metadata: Metadata = {
-  title: 'Contact Us - News Portal',
-  description: 'Get in touch with the News Portal team for tips, feedback, and inquiries.',
+  title: 'Contact Us - KhabarPatra',
+  description: 'Get in touch with the KhabarPatra team for tips, feedback, and inquiries.',
 };
 
 export default function ContactPage() {
