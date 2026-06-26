@@ -1,5 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import mongoose from 'mongoose';
+import slugify from 'slugify';
+import { transliterate } from 'transliteration';
 import { Article } from '../models/Article';
 import { Category } from '../models/Category';
 import { createAuditLog } from '../services/audit.service';
@@ -40,7 +42,7 @@ export const createArticle = async (
       summary: sanitizedSummary,
       content: sanitizedContent,
       author: new mongoose.Types.ObjectId(authorId),
-      status: 'draft',
+      status: req.user!.role === 'super_admin' ? 'approved' : 'draft',
     });
 
     await createAuditLog({
@@ -265,6 +267,18 @@ export const updateArticle = async (
     }
     if (updateData.title) {
       updateData.title = sanitizeString(updateData.title as string);
+
+      // Regenerate slug when title changes (findByIdAndUpdate bypasses pre-save hooks)
+      const transliterated = transliterate(updateData.title as string);
+      let baseSlug = slugify(transliterated, { lower: true, strict: true, trim: true });
+      if (!baseSlug) baseSlug = id.slice(-8);
+      let slug = baseSlug;
+      let counter = 1;
+      while (await Article.exists({ slug, _id: { $ne: id } })) {
+        slug = `${baseSlug}-${counter}`;
+        counter++;
+      }
+      updateData.slug = slug;
     }
     if (updateData.summary) {
       updateData.summary = sanitizeString(updateData.summary as string);

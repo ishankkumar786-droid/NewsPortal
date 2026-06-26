@@ -1,5 +1,6 @@
 import mongoose, { Document, Schema } from 'mongoose';
 import slugify from 'slugify';
+import { transliterate } from 'transliteration';
 
 export type ArticleStatus =
   | 'draft'
@@ -198,11 +199,19 @@ const ArticleSchema = new Schema<IArticle>(
 // Auto-generate slug from title
 ArticleSchema.pre('save', async function (next) {
   if (this.isModified('title')) {
-    const baseSlug = slugify(this.title, {
+    // Transliterate non-Latin characters (Hindi, etc.) to Latin equivalents
+    // e.g. "प्रधानमंत्री ने किया" → "pradhanamantri ne kiya"
+    const transliterated = transliterate(this.title);
+    let baseSlug = slugify(transliterated, {
       lower: true,
       strict: true,
       trim: true,
     });
+
+    // Fallback: if slug is still empty (e.g. only special chars), use ObjectId
+    if (!baseSlug) {
+      baseSlug = this._id.toHexString().slice(-8);
+    }
 
     // Ensure unique slug
     let slug = baseSlug;

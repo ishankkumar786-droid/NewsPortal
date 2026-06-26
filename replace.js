@@ -1,36 +1,34 @@
 const fs = require('fs');
 const path = require('path');
 
-function walk(dir) {
-  let results = [];
-  const list = fs.readdirSync(dir);
-  list.forEach((file) => {
-    file = path.join(dir, file);
-    const stat = fs.statSync(file);
-    if (stat && stat.isDirectory()) {
-      if (!file.includes('node_modules') && !file.includes('.next')) {
-        results = results.concat(walk(file));
-      }
+const targetStr = /KhabarPatra/g;
+const replacementStr = 'Khabarpath';
+
+const walkSync = (dir, filelist = []) => {
+  if (dir.includes('node_modules') || dir.includes('.next') || dir.includes('dist')) return filelist;
+  fs.readdirSync(dir).forEach(file => {
+    const filePath = path.join(dir, file);
+    if (fs.statSync(filePath).isDirectory()) {
+      filelist = walkSync(filePath, filelist);
     } else {
-      if (file.endsWith('.ts') || file.endsWith('.tsx')) {
-        results.push(file);
+      if (filePath.endsWith('.tsx') || filePath.endsWith('.ts')) {
+        filelist.push(filePath);
       }
     }
   });
-  return results;
-}
+  return filelist;
+};
 
-const files = walk(path.join(__dirname, 'frontend', 'src'));
+const files = walkSync('./frontend/src');
+let replacedCount = 0;
 
-let changed = 0;
-files.forEach((file) => {
+files.forEach(file => {
   const content = fs.readFileSync(file, 'utf8');
-  if (content.includes('News Portal')) {
-    const newContent = content.replace(/News Portal/g, 'KhabarPatra');
+  if (targetStr.test(content)) {
+    const newContent = content.replace(targetStr, replacementStr);
     fs.writeFileSync(file, newContent, 'utf8');
-    changed++;
-    console.log('Updated:', file);
+    replacedCount++;
   }
 });
 
-console.log(`Replaced "News Portal" in ${changed} files.`);
+console.log(`Replaced "KhabarPatra" with "Khabarpath" in ${replacedCount} files.`);

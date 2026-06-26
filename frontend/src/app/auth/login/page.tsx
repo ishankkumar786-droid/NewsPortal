@@ -3,7 +3,7 @@ import { LoginForm } from '@/components/auth/LoginForm';
 
 export const metadata: Metadata = {
   title: 'Sign In',
-  description: 'Sign in to your KhabarPatra account',
+  description: 'Sign in to your Khabarpath account',
   robots: { index: false, follow: false },
 };
 
@@ -14,7 +14,7 @@ export default function LoginPage() {
         {/* Logo */}
         <div className="text-center mb-8">
           <h1 className="text-4xl font-serif font-bold text-white">
-            📰 KhabarPatra
+            📰 Khabarpath
           </h1>
           <p className="text-gray-300 mt-2">Your trusted source for breaking news</p>
         </div>

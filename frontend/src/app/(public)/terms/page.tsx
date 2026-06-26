@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Terms and Conditions - KhabarPatra',
+  title: 'Terms and Conditions - Khabarpath',
   robots: { index: false },
 };
 
@@ -15,7 +15,7 @@ export default function TermsPage() {
         
         <h2>1. Agreement to Terms</h2>
         <p>
-          These Terms of Use constitute a legally binding agreement made between you, whether personally or on behalf of an entity ("you") and KhabarPatra ("Company", "we", "us", or "our"), concerning your access to and use of the website as well as any other media form, media channel, mobile website or mobile application related, linked, or otherwise connected thereto.
+          These Terms of Use constitute a legally binding agreement made between you, whether personally or on behalf of an entity ("you") and Khabarpath ("Company", "we", "us", or "our"), concerning your access to and use of the website as well as any other media form, media channel, mobile website or mobile application related, linked, or otherwise connected thereto.
         </p>
 
         <h2>2. Intellectual Property Rights</h2>
@@ -43,7 +43,7 @@ export default function TermsPage() {
 
         <h2>6. Governing Law</h2>
         <p>
-          These Terms shall be governed by and defined following the laws of the jurisdiction in which the Company is established. KhabarPatra and yourself irrevocably consent that the courts of that jurisdiction shall have exclusive jurisdiction to resolve any dispute which may arise in connection with these terms.
+          These Terms shall be governed by and defined following the laws of the jurisdiction in which the Company is established. Khabarpath and yourself irrevocably consent that the courts of that jurisdiction shall have exclusive jurisdiction to resolve any dispute which may arise in connection with these terms.
         </p>
       </div>
     </div>

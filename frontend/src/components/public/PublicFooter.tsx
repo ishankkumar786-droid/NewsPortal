@@ -10,7 +10,7 @@ export function PublicFooter() {
           <div className="md:col-span-1">
             <div className="flex items-center gap-2 mb-4">
               <Newspaper className="h-6 w-6 text-news-red" />
-              <span className="font-serif font-bold text-xl text-white">KhabarPatra</span>
+              <span className="font-serif font-bold text-xl text-white">Khabarpath</span>
             </div>
             <p className="text-sm leading-relaxed">
               Your trusted source for breaking news, in-depth analysis, and the stories that matter.
@@ -78,7 +78,7 @@ export function PublicFooter() {
       {/* Bottom bar */}
       <div className="border-t border-white/10">
         <div className="container mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-gray-500">
-          <p>© {new Date().getFullYear()} KhabarPatra. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Khabarpath. All rights reserved.</p>
           <p>Built with Next.js & Node.js</p>
         </div>
       </div>

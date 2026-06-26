@@ -92,9 +92,9 @@ export function AdminSidebar() {
           <div className="flex items-center gap-3">
             <Newspaper className="h-6 w-6 flex-shrink-0 text-news-red" />
             <span className={cn('font-serif font-bold text-lg truncate md:hidden', sidebarOpen ? 'md:block' : 'md:hidden')}>
-              KhabarPatra
+              Khabarpath
             </span>
-            {sidebarOpen && <span className="hidden md:block font-serif font-bold text-lg truncate">KhabarPatra</span>}
+            {sidebarOpen && <span className="hidden md:block font-serif font-bold text-lg truncate">Khabarpath</span>}
           </div>
           <Button
             variant="ghost"

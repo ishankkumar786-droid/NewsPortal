@@ -102,7 +102,7 @@ export default async function ArticlePage(props: PageProps) {
     },
     publisher: {
       '@type': 'Organization',
-      name: 'KhabarPatra',
+      name: 'Khabarpath',
       logo: {
         '@type': 'ImageObject',
         url: `${siteUrl}/logo.png`,

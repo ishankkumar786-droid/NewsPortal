@@ -111,13 +111,13 @@ export function ArticleForm({ article, isAdmin = false }: ArticleFormProps) {
             uploadImage({ articleId: updated._id, file: imageFile }, {
               onSuccess: () => {
                 toast({ title: 'Article saved' });
-                router.push('/reporter/articles');
+                router.push(isAdmin ? '/admin/articles' : '/reporter/articles');
               },
               onError: (err) => toast({ variant: 'destructive', title: 'Image upload failed', description: extractApiError(err) }),
             });
           } else {
             toast({ title: 'Article saved' });
-            router.push('/reporter/articles');
+            router.push(isAdmin ? '/admin/articles' : '/reporter/articles');
           }
         },
         onError: (err) => toast({ variant: 'destructive', title: 'Save failed', description: extractApiError(err) }),
@@ -128,14 +128,14 @@ export function ArticleForm({ article, isAdmin = false }: ArticleFormProps) {
           if (imageFile) {
             uploadImage({ articleId: created._id, file: imageFile }, {
               onSuccess: () => {
-                toast({ title: 'Article created as draft' });
-                router.push('/reporter/articles');
+                toast({ title: isAdmin ? 'Article created and approved' : 'Article created as draft' });
+                router.push(isAdmin ? '/admin/articles' : '/reporter/articles');
               },
               onError: (err) => toast({ variant: 'destructive', title: 'Image upload failed', description: extractApiError(err) }),
             });
           } else {
-            toast({ title: 'Article created as draft' });
-            router.push('/reporter/articles');
+            toast({ title: isAdmin ? 'Article created and approved' : 'Article created as draft' });
+            router.push(isAdmin ? '/admin/articles' : '/reporter/articles');
           }
         },
         onError: (err) => toast({ variant: 'destructive', title: 'Create failed', description: extractApiError(err) }),
@@ -158,7 +158,7 @@ export function ArticleForm({ article, isAdmin = false }: ArticleFormProps) {
           <Button variant="outline" onClick={() => router.back()}>Cancel</Button>
           <Button variant="outline" onClick={saveAsDraft} disabled={isPending}>
             {isPending ? <Loader2 className="animate-spin" /> : <Save className="h-4 w-4" />}
-            Save Draft
+            {isAdmin ? 'Save & Approve' : 'Save Draft'}
           </Button>
         </div>
       </div>

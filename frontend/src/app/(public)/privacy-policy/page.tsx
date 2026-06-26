@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy - KhabarPatra',
+  title: 'Privacy Policy - Khabarpath',
   robots: { index: false },
 };
 
@@ -15,7 +15,7 @@ export default function PrivacyPolicyPage() {
         
         <h2>1. Introduction</h2>
         <p>
-          At KhabarPatra, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website. Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the site.
+          At Khabarpath, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website. Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the site.
         </p>
 
         <h2>2. Information We Collect</h2>

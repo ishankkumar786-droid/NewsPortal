@@ -175,10 +175,15 @@ export function AdminArticlesManager() {
 
       <div className="flex items-center justify-between flex-wrap gap-3">
         <h1 className="text-2xl font-bold">Articles Management</h1>
-        <Button variant="outline" size="sm" onClick={() => refetch({ cancelRefetch: false })}>
-          <RefreshCw className="h-4 w-4" />
-          Refresh
-        </Button>
+        <div className="flex gap-2">
+          <Button size="sm" asChild>
+            <Link href="/admin/articles/new">Write Article</Link>
+          </Button>
+          <Button variant="outline" size="sm" onClick={() => refetch({ cancelRefetch: false })}>
+            <RefreshCw className="h-4 w-4 mr-2" />
+            Refresh
+          </Button>
+        </div>
       </div>
 
       <div className="flex flex-wrap gap-2 items-center">
