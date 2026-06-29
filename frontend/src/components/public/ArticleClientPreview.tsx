@@ -73,7 +73,7 @@ export function ArticleClientPreview({ slug }: ArticleClientPreviewProps) {
     );
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://newsportal.com';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://khabarpath.in';
   const articleUrl = `${siteUrl}/article/${article!.slug}`;
 
   return <ArticleView article={article!} articleUrl={articleUrl} isPreview />;

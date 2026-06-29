@@ -39,7 +39,7 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
     };
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://newsportal.com';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://khabarpath.in';
   const articleUrl = `${siteUrl}/article/${article.slug}`;
   const imageUrl = article.featuredImage?.url;
 
@@ -83,7 +83,7 @@ export default async function ArticlePage(props: PageProps) {
     return <ArticleClientPreview slug={params.slug} />;
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://newsportal.com';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://khabarpath.in';
   const articleUrl = `${siteUrl}/article/${article.slug}`;
 
   // JSON-LD Structured Data

@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://newsportal.com';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://khabarpath.in';
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api/v1';
 
 async function fetchPublishedArticles() {

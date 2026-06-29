@@ -1,7 +1,14 @@
 import type { Metadata } from 'next';
-import { Inter, Playfair_Display } from 'next/font/google';
+import { Inter, Playfair_Display, Mukta } from 'next/font/google';
 import './globals.css';
 import { Providers } from '@/components/providers/Providers';
+
+const mukta = Mukta({
+  weight: ['300', '400', '500', '600', '700'],
+  subsets: ['devanagari', 'latin'],
+  variable: '--font-mukta',
+  display: 'swap',
+});
 
 const inter = Inter({
   subsets: ['latin'],
@@ -37,7 +44,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: process.env.NEXT_PUBLIC_SITE_URL || 'https://newsportal.com',
+    url: process.env.NEXT_PUBLIC_SITE_URL || 'https://khabarpath.in',
     siteName: 'Khabarpath',
     title: 'Khabarpath — Breaking News & Latest Updates',
     description: 'Get the latest breaking news, top headlines, and in-depth coverage.',
@@ -71,8 +78,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${playfair.variable} font-sans antialiased`}>
+    <html lang="hi" suppressHydrationWarning>
+      <body className={`${inter.variable} ${playfair.variable} ${mukta.variable} font-sans antialiased`} style={{ fontFamily: 'var(--font-mukta), var(--font-inter), sans-serif' }}>
         <Providers>{children}</Providers>
       </body>
     </html>
