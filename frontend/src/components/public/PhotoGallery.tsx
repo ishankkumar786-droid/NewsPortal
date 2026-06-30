@@ -32,7 +32,7 @@ export function PhotoGallery({ articles }: PhotoGalleryProps) {
             <Link 
               key={article._id} 
               href={`/article/${article.slug}`}
-              className={`group relative overflow-hidden rounded-xl block ${isLarge ? 'col-span-2 row-span-2 aspect-[4/3] md:aspect-auto' : 'aspect-square'}`}
+              className={`group relative overflow-hidden rounded-xl block ${isLarge ? 'col-span-2 row-span-2 aspect-[4/3] md:h-full min-h-[300px]' : 'aspect-square'}`}
             >
               <Image
                 src={article.featuredImage?.url || '/placeholder.jpg'}

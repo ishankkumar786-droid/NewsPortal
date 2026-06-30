@@ -92,7 +92,7 @@ export function CategorySection({ categorySlug, label }: CategorySectionProps) {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Featured article */}
           {featured && (
-            <article className="group relative rounded-xl overflow-hidden bg-gray-900 aspect-[4/3] md:aspect-auto">
+            <article className="group relative rounded-xl overflow-hidden bg-gray-900 aspect-[4/3] md:h-full min-h-[250px]">
               {featured.featuredImage?.url ? (
                 <Image
                   src={featured.featuredImage.url}

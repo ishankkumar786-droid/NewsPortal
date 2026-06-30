@@ -56,7 +56,7 @@ export function HeroSection({ articles: initialArticles }: { articles?: Article[
       {/* Main Hero Article */}
       <Link
         href={`/article/${hero.slug}`}
-        className="group relative overflow-hidden rounded-xl bg-gray-900 aspect-[16/9] md:aspect-auto md:h-[420px] block"
+        className="group relative overflow-hidden rounded-xl bg-gray-900 aspect-[16/9] md:aspect-auto md:h-full min-h-[300px] block"
         aria-label={`Read: ${hero.title}`}
       >
         {hero.featuredImage?.url ? (
@@ -104,7 +104,7 @@ export function HeroSection({ articles: initialArticles }: { articles?: Article[
           <Link
             key={article._id}
             href={`/article/${article.slug}`}
-            className="group relative overflow-hidden rounded-xl bg-gray-900 block"
+            className="group relative overflow-hidden rounded-xl bg-gray-900 block h-full min-h-[200px]"
             aria-label={`Read: ${article.title}`}
           >
             {article.featuredImage?.url ? (
