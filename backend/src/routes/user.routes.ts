@@ -27,5 +27,6 @@ router.get('/:id', authorize('super_admin'), userController.getUserById);
 router.post('/reporters', authorize('super_admin'), userController.createReporter);
 router.patch('/:id', authorize('super_admin'), userController.updateUser);
 router.patch('/:id/deactivate', authorize('super_admin'), userController.deactivateUser);
+router.delete('/:id', authorize('super_admin'), userController.deleteUser);
 
 export default router;

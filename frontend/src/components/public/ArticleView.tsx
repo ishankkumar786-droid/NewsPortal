@@ -4,7 +4,8 @@ import { formatDate } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
 import { AdBanner } from '@/components/ads/AdBanner';
 import { GoogleAdSense } from '@/components/ads/GoogleAdSense';
-import { Eye, Clock, Share2, Twitter, Facebook, MessageCircle } from 'lucide-react';
+import { Eye, Clock } from 'lucide-react';
+import { ShareButton } from '@/components/public/ShareButton';
 
 // Minimal shape of the article fields this component reads.
 interface ArticleViewArticle {
@@ -208,46 +209,7 @@ export function ArticleView({ article, articleUrl, isPreview = false }: ArticleV
 
         {/* Share */}
         <div className="mt-8 pt-6 border-t">
-          <p className="text-sm font-semibold mb-3 flex items-center gap-2">
-            <Share2 className="h-4 w-4" />
-            Share this article
-          </p>
-          <div className="flex gap-3">
-            <a
-              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
-                article.title
-              )}&url=${encodeURIComponent(articleUrl)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 bg-[#1DA1F2] text-white rounded-lg text-sm hover:bg-[#1a91da] transition-colors"
-              aria-label="Share on Twitter"
-            >
-              <Twitter className="h-4 w-4" />
-              Twitter
-            </a>
-            <a
-              href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(articleUrl)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 bg-[#4267B2] text-white rounded-lg text-sm hover:bg-[#365899] transition-colors"
-              aria-label="Share on Facebook"
-            >
-              <Facebook className="h-4 w-4" />
-              Facebook
-            </a>
-            <a
-              href={`https://api.whatsapp.com/send?text=${encodeURIComponent(
-                article.title + ' ' + articleUrl
-              )}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 bg-[#25D366] text-white rounded-lg text-sm hover:bg-[#1ebe57] transition-colors"
-              aria-label="Share on WhatsApp"
-            >
-              <MessageCircle className="h-4 w-4" />
-              WhatsApp
-            </a>
-          </div>
+          <ShareButton title={article.title} text={article.summary} url={articleUrl} />
         </div>
 
         {/* Author Bio */}

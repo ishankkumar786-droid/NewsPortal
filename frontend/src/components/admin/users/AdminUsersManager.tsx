@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Plus, UserX, Loader2 } from 'lucide-react';
+import { Plus, UserX, Trash2, Loader2 } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -57,6 +57,16 @@ function useDeactivateUser() {
   });
 }
 
+function useDeleteUser() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (id: string) => {
+      await api.delete(`/users/${id}`);
+    },
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['users'] }),
+  });
+}
+
 function CreateReporterForm({ onSuccess, onCancel }: { onSuccess: () => void; onCancel: () => void }) {
   const { mutate, isPending } = useCreateReporter();
   const { toast } = useToast();
@@ -107,6 +117,7 @@ export function AdminUsersManager() {
   const [roleFilter, setRoleFilter] = useState<string>('reporter');
   const { data: users, isLoading } = useUsers(roleFilter === 'all' ? undefined : roleFilter);
   const { mutate: deactivate, isPending: isDeactivating } = useDeactivateUser();
+  const { mutate: deleteUser, isPending: isDeleting } = useDeleteUser();
   const { toast } = useToast();
 
   const handleDeactivate = (user: User) => {
@@ -114,6 +125,14 @@ export function AdminUsersManager() {
     deactivate(user._id, {
       onSuccess: () => toast({ title: 'User deactivated' }),
       onError: (err) => toast({ variant: 'destructive', title: 'Failed', description: extractApiError(err) }),
+    });
+  };
+
+  const handleDelete = (user: User) => {
+    if (!confirm(`Are you sure you want to completely delete "${user.name}"? This will wipe them from the database.`)) return;
+    deleteUser(user._id, {
+      onSuccess: () => toast({ title: 'User deleted permanently' }),
+      onError: (err) => toast({ variant: 'destructive', title: 'Failed to delete', description: extractApiError(err) }),
     });
   };
 
@@ -173,12 +192,20 @@ export function AdminUsersManager() {
                     <p className="text-xs text-muted-foreground">{user.email}</p>
                     <p className="text-xs text-muted-foreground">Joined {formatDate(user.createdAt)}</p>
                   </div>
-                  {user.isActive && user.role !== 'super_admin' && (
-                    <Button size="sm" variant="ghost" className="text-destructive hover:text-destructive"
-                      onClick={() => handleDeactivate(user)} disabled={isDeactivating} title="Deactivate user">
-                      <UserX className="h-4 w-4" />
-                    </Button>
-                  )}
+                  <div className="flex gap-1">
+                    {user.isActive && user.role !== 'super_admin' && (
+                      <Button size="sm" variant="ghost" className="text-destructive hover:text-destructive"
+                        onClick={() => handleDeactivate(user)} disabled={isDeactivating} title="Deactivate user">
+                        <UserX className="h-4 w-4" />
+                      </Button>
+                    )}
+                    {user.role !== 'super_admin' && (
+                      <Button size="sm" variant="ghost" className="text-destructive hover:text-destructive"
+                        onClick={() => handleDelete(user)} disabled={isDeleting} title="Permanently delete user">
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>

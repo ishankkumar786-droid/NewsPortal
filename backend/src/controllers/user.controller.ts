@@ -153,6 +153,38 @@ export const deactivateUser = async (
   }
 };
 
+export const deleteUser = async (
+  req: Request<{ id: string }>,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const { id } = req.params;
+
+    if (id === req.user!.id) {
+      throw new ForbiddenError('You cannot delete your own account');
+    }
+
+    const user = await User.findByIdAndDelete(id);
+    if (!user) throw new NotFoundError('User');
+
+    invalidateUserCache(id);
+
+    await createAuditLog({
+      action: 'USER_DELETED',
+      performedBy: req.user!.id,
+      targetResource: 'User',
+      targetId: id,
+      details: { email: user.email },
+      req,
+    });
+
+    sendSuccess(res, null, 'User deleted successfully');
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const uploadAvatar = async (
   req: Request,
   res: Response,
