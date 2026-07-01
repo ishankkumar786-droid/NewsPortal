@@ -5,35 +5,35 @@ import { useEffect } from 'react';
 // Google AdSense slot positions — hardcoded, admin cannot modify
 const ADSENSE_CONFIG = {
   HOME_TOP_ADSENSE: {
-    'data-ad-client': 'ca-pub-XXXXXXXXXXXXXXXX',
+    'data-ad-client': 'ca-pub-3532106792157988',
     'data-ad-slot': '1234567890',
     'data-ad-format': 'auto',
     style: { display: 'block' },
     label: 'Advertisement',
   },
   HOME_MIDDLE_ADSENSE: {
-    'data-ad-client': 'ca-pub-XXXXXXXXXXXXXXXX',
+    'data-ad-client': 'ca-pub-3532106792157988',
     'data-ad-slot': '0987654321',
     'data-ad-format': 'auto',
     style: { display: 'block' },
     label: 'Advertisement',
   },
   ARTICLE_MIDDLE_ADSENSE: {
-    'data-ad-client': 'ca-pub-XXXXXXXXXXXXXXXX',
+    'data-ad-client': 'ca-pub-3532106792157988',
     'data-ad-slot': '1122334455',
     'data-ad-format': 'auto',
     style: { display: 'block', textAlign: 'center' as const },
     label: 'Advertisement',
   },
   SIDEBAR_ADSENSE: {
-    'data-ad-client': 'ca-pub-XXXXXXXXXXXXXXXX',
+    'data-ad-client': 'ca-pub-3532106792157988',
     'data-ad-slot': '5544332211',
     'data-ad-format': 'auto',
     style: { display: 'block' },
     label: 'Advertisement',
   },
   FOOTER_ADSENSE: {
-    'data-ad-client': 'ca-pub-XXXXXXXXXXXXXXXX',
+    'data-ad-client': 'ca-pub-3532106792157988',
     'data-ad-slot': '9988776655',
     'data-ad-format': 'auto',
     style: { display: 'block' },

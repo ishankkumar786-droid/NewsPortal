@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter, Playfair_Display, Mukta } from 'next/font/google';
+import Script from 'next/script';
 import './globals.css';
 import { Providers } from '@/components/providers/Providers';
 
@@ -81,6 +82,12 @@ export default function RootLayout({
     <html lang="hi" suppressHydrationWarning>
       <body className={`${inter.variable} ${playfair.variable} ${mukta.variable} font-sans antialiased`} style={{ fontFamily: 'var(--font-mukta), var(--font-inter), sans-serif' }}>
         <Providers>{children}</Providers>
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3532106792157988"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
