@@ -140,3 +140,11 @@ html { scroll-behavior: smooth; }
   .no-print { display: none !important; }
   .article-content { @apply text-black; }
 }
+
+/* AdSense Fallbacks */
+ins.adsbygoogle[data-ad-status="unfilled"] {
+  display: none !important;
+}
+ins.adsbygoogle {
+  background: transparent !important;
+}
