@@ -125,6 +125,7 @@ export const useUpdateArticle = (id: string) => {
       queryClient.invalidateQueries({ queryKey: ['articles'] });
       queryClient.invalidateQueries({ queryKey: ['articles-infinite'] });
       queryClient.invalidateQueries({ queryKey: ['article', id] });
+      queryClient.invalidateQueries({ queryKey: ['article-slug'] });
       queryClient.invalidateQueries({ queryKey: ['analytics', 'dashboard'] });
     },
   });

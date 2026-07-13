@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import Link from 'next/link';
-import { Eye, Check, X, Send, Trash2, Loader2, RefreshCw } from 'lucide-react';
+import { Eye, Edit, Check, X, Send, Trash2, Loader2, RefreshCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -262,6 +262,12 @@ export function AdminArticlesManager() {
                     <Button size="sm" variant="ghost" asChild title="View article">
                       <Link href={`/article/${article.slug}`} target="_blank">
                         <Eye className="h-4 w-4" />
+                      </Link>
+                    </Button>
+
+                    <Button size="sm" variant="ghost" asChild title="Edit article">
+                      <Link href={`/admin/articles/${article._id}/edit`}>
+                        <Edit className="h-4 w-4" />
                       </Link>
                     </Button>
 

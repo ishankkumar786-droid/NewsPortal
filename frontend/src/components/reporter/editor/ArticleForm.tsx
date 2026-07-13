@@ -158,7 +158,7 @@ export function ArticleForm({ article, isAdmin = false }: ArticleFormProps) {
           <Button variant="outline" onClick={() => router.back()}>Cancel</Button>
           <Button variant="outline" onClick={saveAsDraft} disabled={isPending}>
             {isPending ? <Loader2 className="animate-spin" /> : <Save className="h-4 w-4" />}
-            {isAdmin ? 'Save & Approve' : 'Save Draft'}
+            {isAdmin ? (isEditing ? 'Save Changes' : 'Save & Approve') : 'Save Draft'}
           </Button>
         </div>
       </div>
