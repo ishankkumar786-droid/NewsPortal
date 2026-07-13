@@ -82,6 +82,23 @@ export default function RootLayout({
     <html lang="hi" suppressHydrationWarning>
       <body className={`${inter.variable} ${playfair.variable} ${mukta.variable} font-sans antialiased`} style={{ fontFamily: 'var(--font-mukta), var(--font-inter), sans-serif' }}>
         <Providers>{children}</Providers>
+        
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-WE7QT1VKYS"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){window.dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-WE7QT1VKYS');
+          `}
+        </Script>
+
+        {/* Google AdSense */}
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3532106792157988"
