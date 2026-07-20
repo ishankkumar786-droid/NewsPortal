@@ -20,6 +20,7 @@ import userRoutes from './routes/user.routes';
 import analyticsRoutes from './routes/analytics.routes';
 import mediaRoutes from './routes/media.routes';
 import auditLogRoutes from './routes/auditLog.routes';
+import contactRoutes from './routes/contact.routes';
 
 const app: Application = express();
 
@@ -130,6 +131,7 @@ app.use(`${API_PREFIX}/users`, userRoutes);
 app.use(`${API_PREFIX}/analytics`, analyticsRoutes);
 app.use(`${API_PREFIX}/media`, mediaRoutes);
 app.use(`${API_PREFIX}/audit-logs`, auditLogRoutes);
+app.use(`${API_PREFIX}/contact`, contactRoutes);
 
 // ===========================
 // ERROR HANDLING

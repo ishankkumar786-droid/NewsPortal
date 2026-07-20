@@ -15,6 +15,7 @@ import {
   ChevronRight,
   Newspaper,
   X,
+  Mail,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useUIStore } from '@/store/ui.store';
@@ -60,6 +61,11 @@ const navItems = [
     label: 'Audit Logs',
     href: '/admin/audit-logs',
     icon: ClipboardList,
+  },
+  {
+    label: 'Contacts',
+    href: '/admin/contacts',
+    icon: Mail,
   },
 ];
 
