@@ -24,6 +24,9 @@ import contactRoutes from './routes/contact.routes';
 
 const app: Application = express();
 
+// Trust the reverse proxy (Google Cloud Run) so rate limiting works correctly
+app.set('trust proxy', 1);
+
 // ===========================
 // SECURITY MIDDLEWARE
 // ===========================
@@ -52,7 +55,10 @@ app.use(
 const allowedOrigins = [
   process.env.FRONTEND_URL || 'http://localhost:3000',
   'http://localhost:3000',
+  'http://localhost:3001',
+  'http://localhost:3002',
   'http://192.168.29.222:3000',
+  'http://192.168.29.222:3001',
   'https://khabarpath.in',
   'https://www.khabarpath.in',
 ];

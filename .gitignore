@@ -8,5 +8,9 @@ out/
 build/
 .DS_Store
 logs/
+*.log
+*error-log.txt
+*.tsbuildinfo
 coverage/
 env.yaml
+

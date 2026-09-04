@@ -284,9 +284,30 @@ export const updateArticle = async (
       updateData.summary = sanitizeString(updateData.summary as string);
     }
 
+    const unsetData: Record<string, 1> = {};
+    if (updateData.removeFeaturedImage) {
+      unsetData.featuredImage = 1;
+      delete updateData.removeFeaturedImage;
+      if (article.featuredImage?.publicId) {
+        deleteFromCloudinary(article.featuredImage.publicId).catch(() => {});
+      }
+    }
+    if (updateData.removeSecondaryImage) {
+      unsetData.secondaryImage = 1;
+      delete updateData.removeSecondaryImage;
+      if (article.secondaryImage?.publicId) {
+        deleteFromCloudinary(article.secondaryImage.publicId).catch(() => {});
+      }
+    }
+
+    const updateQuery: Record<string, unknown> = { $set: updateData };
+    if (Object.keys(unsetData).length > 0) {
+      updateQuery.$unset = unsetData;
+    }
+
     const updated = await Article.findByIdAndUpdate(
       id,
-      { $set: updateData },
+      updateQuery,
       { new: true, runValidators: true }
     ).populate('author', 'name email').populate('category', 'name slug');
 
@@ -575,6 +596,76 @@ export const uploadFeaturedImage = async (
   }
 };
 
+export const uploadSecondaryImage = async (
+  req: Request<{ id: string }>,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const { id } = req.params;
+    const userId = req.user!.id;
+    const userRole = req.user!.role;
+
+    if (!req.file) {
+      throw new AppError('No image file provided', 400);
+    }
+
+    const article = await Article.findById(id);
+    if (!article) {
+      throw new NotFoundError('Article');
+    }
+
+    // Permissions check
+    if (userRole === 'reporter') {
+      if (article.author.toString() !== userId) {
+        throw new ForbiddenError('You can only upload images to your own articles');
+      }
+      const editableStatuses = ['draft', 'rejected'];
+      if (!editableStatuses.includes(article.status)) {
+        throw new ForbiddenError('You cannot edit an article that has been submitted');
+      }
+    }
+
+    // Delete old secondary image if it exists
+    if (article.secondaryImage?.publicId) {
+      await deleteFromCloudinary(article.secondaryImage.publicId).catch(() => {});
+    }
+
+    // Upload new image
+    const uploaded = await uploadToCloudinary(req.file.buffer, {
+      folder: 'articles',
+      resourceType: 'image',
+    });
+
+    const updated = await Article.findByIdAndUpdate(
+      id,
+      {
+        $set: {
+          secondaryImage: {
+            url: uploaded.url,
+            publicId: uploaded.publicId,
+            alt: req.body.alt || article.title,
+          },
+        },
+      },
+      { new: true }
+    );
+
+    await createAuditLog({
+      action: 'ARTICLE_UPDATED',
+      performedBy: userId,
+      targetResource: 'Article',
+      targetId: id,
+      details: { action: 'upload_secondary_image' },
+      req,
+    });
+
+    sendSuccess(res, { article: updated }, 'Secondary image uploaded successfully');
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const deleteArticle = async (
   req: Request<{ id: string }>,
   res: Response,
@@ -605,6 +696,10 @@ export const deleteArticle = async (
       deletions.push(deleteFromCloudinary(article.featuredImage.publicId));
     }
 
+    if (article.secondaryImage?.publicId) {
+      deletions.push(deleteFromCloudinary(article.secondaryImage.publicId));
+    }
+
     article.galleryImages.forEach((img) => {
       if (img.publicId) {
         deletions.push(deleteFromCloudinary(img.publicId));
@@ -629,6 +724,46 @@ export const deleteArticle = async (
     });
 
     sendSuccess(res, null, 'Article deleted successfully');
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const toggleLike = async (
+  req: Request<{ id: string }>,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const { id } = req.params;
+    const { direction } = req.body as { direction?: 'like' | 'unlike' };
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      throw new NotFoundError('Article');
+    }
+
+    const article = await Article.findById(id);
+    if (!article) throw new NotFoundError('Article');
+
+    const update = direction === 'unlike'
+      ? { $inc: { likeCount: -1 } }
+      : { $inc: { likeCount: 1 } };
+
+    const updated = await Article.findByIdAndUpdate(id, update, { new: true })
+      .populate('author', 'name email avatar bio')
+      .populate('category', 'name slug color');
+
+    // Clamp to 0 to avoid negative counts
+    if (updated && updated.likeCount < 0) {
+      updated.likeCount = 0;
+      await Article.findByIdAndUpdate(id, { $set: { likeCount: 0 } });
+    }
+
+    sendSuccess(
+      res,
+      { article: updated },
+      direction === 'unlike' ? 'Article unliked' : 'Article liked'
+    );
   } catch (error) {
     next(error);
   }

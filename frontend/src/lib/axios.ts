@@ -49,12 +49,19 @@ api.interceptors.response.use(
   async (error: AxiosError) => {
     const originalRequest = error.config as AxiosRequestConfig & { _retry?: boolean };
 
-    // If 401 and not already retrying and not the refresh endpoint itself
+    // Only attempt refresh if:
+    // 1. We got a 401
+    // 2. Not already retrying
+    // 3. Not the refresh/login endpoints themselves
+    // 4. The user actually has a token (was logged in)
+    const hasToken = !!useAuthStore.getState().accessToken;
+
     if (
       error.response?.status === 401 &&
       !originalRequest._retry &&
       !originalRequest.url?.includes('/auth/refresh-token') &&
-      !originalRequest.url?.includes('/auth/login')
+      !originalRequest.url?.includes('/auth/login') &&
+      hasToken
     ) {
       if (isRefreshing) {
         // Queue the request while refreshing
@@ -86,7 +93,6 @@ api.interceptors.response.use(
       } catch (refreshError) {
         processQueue(refreshError as AxiosError, null);
         useAuthStore.getState().logout();
-        window.location.href = '/auth/login';
         return Promise.reject(refreshError);
       } finally {
         isRefreshing = false;

@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import * as articleController from '../controllers/article.controller';
+import * as commentController from '../controllers/comment.controller';
 import { authenticate, authorize, optionalAuth } from '../middleware/auth.middleware';
 import { validate } from '../middleware/validate.middleware';
 import {
@@ -16,6 +17,12 @@ const router = Router();
 router.get('/', optionalAuth, validate(ArticleQuerySchema), articleController.getArticles);
 router.get('/slug/:slug', optionalAuth, articleController.getArticleBySlug);
 router.get('/:id', optionalAuth, articleController.getArticleById);
+
+// Public comment routes
+router.get('/:id/comments', commentController.getArticleComments);
+
+// Public like route (anonymous — deduplication via localStorage on the client)
+router.post('/:id/like', articleController.toggleLike);
 
 // Protected: Reporters and Admins
 router.use(authenticate);
@@ -75,5 +82,17 @@ router.post(
   handleUploadError,
   articleController.uploadFeaturedImage
 );
+
+router.post(
+  '/:id/secondary-image',
+  authorize('reporter', 'super_admin'),
+  uploadImage.single('image'),
+  handleUploadError,
+  articleController.uploadSecondaryImage
+);
+
+// User actions (Comment — requires auth)
+router.post('/:id/comments', commentController.addComment);
+router.delete('/:id/comments/:commentId', commentController.deleteComment);
 
 export default router;

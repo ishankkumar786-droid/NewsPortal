@@ -14,7 +14,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { RichTextEditor } from '@/components/editor/RichTextEditor';
 import { useCategories } from '@/hooks/useCategories';
-import { useCreateArticle, useUpdateArticle, useUploadFeaturedImage } from '@/hooks/useArticles';
+import { useCreateArticle, useUpdateArticle, useUploadFeaturedImage, useUploadSecondaryImage } from '@/hooks/useArticles';
 import { useToast } from '@/hooks/use-toast';
 import { extractApiError } from '@/lib/utils';
 import type { Article } from '@/types';
@@ -46,16 +46,21 @@ export function ArticleForm({ article, isAdmin = false }: ArticleFormProps) {
   const [tagInput, setTagInput] = useState('');
   const [imagePreview, setImagePreview] = useState<string | null>(article?.featuredImage?.url || null);
   const [imageFile, setImageFile] = useState<File | null>(null);
+  const [removeFeaturedImage, setRemoveFeaturedImage] = useState(false);
+  const [secondaryImagePreview, setSecondaryImagePreview] = useState<string | null>(article?.secondaryImage?.url || null);
+  const [secondaryImageFile, setSecondaryImageFile] = useState<File | null>(null);
+  const [removeSecondaryImage, setRemoveSecondaryImage] = useState(false);
   const [seoOpen, setSeoOpen] = useState(false);
 
   const { mutate: createArticle, isPending: isCreating } = useCreateArticle();
   const { mutate: updateArticle, isPending: isUpdating } = useUpdateArticle(article?._id || '');
   const { mutate: uploadImage, isPending: isUploadingImage } = useUploadFeaturedImage();
+  const { mutate: uploadSecondaryImage, isPending: isUploadingSecondaryImage } = useUploadSecondaryImage();
 
   const isEditing = !!article;
   const isPending = isCreating || isUpdating;
 
-  const { register, handleSubmit, control, watch, setValue, getValues, formState: { errors } } = useForm<FormData>({
+  const { register, handleSubmit, control, watch, setValue, formState: { errors } } = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues: {
       title: article?.title || '',
@@ -90,6 +95,17 @@ export function ArticleForm({ article, isAdmin = false }: ArticleFormProps) {
     if (!file) return;
     setImageFile(file);
     setImagePreview(URL.createObjectURL(file));
+    setRemoveFeaturedImage(false);
+    e.target.value = '';
+  };
+
+  const handleSecondaryImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setSecondaryImageFile(file);
+    setSecondaryImagePreview(URL.createObjectURL(file));
+    setRemoveSecondaryImage(false);
+    e.target.value = '';
   };
 
   const saveAsDraft = () => {
@@ -102,42 +118,51 @@ export function ArticleForm({ article, isAdmin = false }: ArticleFormProps) {
       videoUrl: data.videoUrl || undefined,
       seoTitle: data.seoTitle || undefined,
       seoDescription: data.seoDescription || undefined,
+      ...(isEditing && removeFeaturedImage && !imageFile ? { removeFeaturedImage: true } : {}),
+      ...(isEditing && removeSecondaryImage && !secondaryImageFile ? { removeSecondaryImage: true } : {}),
+    };
+
+    const handleUploadsAndRedirect = (articleId: string) => {
+      let uploadsRemaining = 0;
+      if (imageFile) uploadsRemaining++;
+      if (secondaryImageFile) uploadsRemaining++;
+
+      const finalize = () => {
+        uploadsRemaining--;
+        if (uploadsRemaining <= 0) {
+          toast({ title: isEditing ? 'Article saved' : (isAdmin ? 'Article created and approved' : 'Article created as draft') });
+          router.push(isAdmin ? '/admin/articles' : '/reporter/articles');
+        }
+      };
+
+      if (uploadsRemaining === 0) {
+        toast({ title: isEditing ? 'Article saved' : (isAdmin ? 'Article created and approved' : 'Article created as draft') });
+        router.push(isAdmin ? '/admin/articles' : '/reporter/articles');
+        return;
+      }
+
+      if (imageFile) {
+        uploadImage({ articleId, file: imageFile }, {
+          onSuccess: finalize,
+          onError: (err) => toast({ variant: 'destructive', title: 'Featured image upload failed', description: extractApiError(err) }),
+        });
+      }
+      if (secondaryImageFile) {
+        uploadSecondaryImage({ articleId, file: secondaryImageFile }, {
+          onSuccess: finalize,
+          onError: (err) => toast({ variant: 'destructive', title: 'Secondary image upload failed', description: extractApiError(err) }),
+        });
+      }
     };
 
     if (isEditing) {
       updateArticle(payload, {
-        onSuccess: (updated) => {
-          if (imageFile) {
-            uploadImage({ articleId: updated._id, file: imageFile }, {
-              onSuccess: () => {
-                toast({ title: 'Article saved' });
-                router.push(isAdmin ? '/admin/articles' : '/reporter/articles');
-              },
-              onError: (err) => toast({ variant: 'destructive', title: 'Image upload failed', description: extractApiError(err) }),
-            });
-          } else {
-            toast({ title: 'Article saved' });
-            router.push(isAdmin ? '/admin/articles' : '/reporter/articles');
-          }
-        },
+        onSuccess: (updated) => handleUploadsAndRedirect(updated._id),
         onError: (err) => toast({ variant: 'destructive', title: 'Save failed', description: extractApiError(err) }),
       });
     } else {
       createArticle(payload, {
-        onSuccess: (created) => {
-          if (imageFile) {
-            uploadImage({ articleId: created._id, file: imageFile }, {
-              onSuccess: () => {
-                toast({ title: isAdmin ? 'Article created and approved' : 'Article created as draft' });
-                router.push(isAdmin ? '/admin/articles' : '/reporter/articles');
-              },
-              onError: (err) => toast({ variant: 'destructive', title: 'Image upload failed', description: extractApiError(err) }),
-            });
-          } else {
-            toast({ title: isAdmin ? 'Article created and approved' : 'Article created as draft' });
-            router.push(isAdmin ? '/admin/articles' : '/reporter/articles');
-          }
-        },
+        onSuccess: (created) => handleUploadsAndRedirect(created._id),
         onError: (err) => toast({ variant: 'destructive', title: 'Create failed', description: extractApiError(err) }),
       });
     }
@@ -240,37 +265,99 @@ export function ArticleForm({ article, isAdmin = false }: ArticleFormProps) {
 
         {/* Sidebar */}
         <div className="space-y-4">
-          {/* Featured Image */}
+          {/* Images Section Header */}
+          <div className="flex items-center justify-between">
+            <span className="text-sm font-semibold">Article Images</span>
+            <span className="text-xs text-muted-foreground">Upload 0, 1, or 2 images</span>
+          </div>
+
+          {/* Featured Image (Image 1) */}
           <Card>
-            <CardHeader><CardTitle className="text-base">Featured Image</CardTitle></CardHeader>
+            <CardHeader className="pb-3">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-sm font-medium">Primary Image (Image 1 - Hero/Cover)</CardTitle>
+                <Badge variant="outline" className="text-[10px]">Optional</Badge>
+              </div>
+            </CardHeader>
             <CardContent className="space-y-3">
               {imagePreview ? (
                 <div className="relative aspect-video rounded-lg overflow-hidden bg-muted">
                   <Image src={imagePreview} alt="Featured" fill className="object-cover" sizes="300px" />
                   <button
                     type="button"
-                    onClick={() => { setImagePreview(null); setImageFile(null); }}
-                    className="absolute top-2 right-2 bg-black/60 text-white rounded-full p-1 hover:bg-black/80"
-                    aria-label="Remove image"
+                    onClick={() => {
+                      setImagePreview(null);
+                      setImageFile(null);
+                      if (article?.featuredImage?.url) setRemoveFeaturedImage(true);
+                    }}
+                    className="absolute top-2 right-2 bg-black/70 hover:bg-black text-white rounded-full p-1 transition-colors"
+                    aria-label="Remove primary image"
+                    title="Remove image"
                   >
-                    <X className="h-3 w-3" />
+                    <X className="h-3.5 w-3.5" />
                   </button>
                 </div>
               ) : (
-                <div className="aspect-video rounded-lg border-2 border-dashed flex items-center justify-center bg-muted/30">
-                  <ImageIcon className="h-8 w-8 text-muted-foreground" />
+                <div className="aspect-video rounded-lg border-2 border-dashed flex flex-col items-center justify-center bg-muted/20 text-muted-foreground gap-1.5">
+                  <ImageIcon className="h-7 w-7 text-muted-foreground/60" />
+                  <span className="text-xs">No primary image selected</span>
                 </div>
               )}
-              <label className="cursor-pointer">
+              <label className="cursor-pointer block">
                 <Button type="button" variant="outline" size="sm" className="w-full" asChild>
                   <span>
                     <Upload className="h-4 w-4" />
-                    {imagePreview ? 'Change Image' : 'Upload Image'}
+                    {imagePreview ? 'Change Primary Image' : 'Add Primary Image'}
                   </span>
                 </Button>
                 <input type="file" accept="image/*" className="hidden" onChange={handleImageChange} />
               </label>
-              {isUploadingImage && <p className="text-xs text-muted-foreground flex items-center gap-1"><Loader2 className="h-3 w-3 animate-spin" />Uploading...</p>}
+              {isUploadingImage && <p className="text-xs text-muted-foreground flex items-center gap-1"><Loader2 className="h-3 w-3 animate-spin" />Uploading primary image...</p>}
+            </CardContent>
+          </Card>
+
+          {/* Secondary Image (Image 2) */}
+          <Card>
+            <CardHeader className="pb-3">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-sm font-medium">Secondary Image (Image 2 - In-Body)</CardTitle>
+                <Badge variant="outline" className="text-[10px]">Optional</Badge>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              {secondaryImagePreview ? (
+                <div className="relative aspect-video rounded-lg overflow-hidden bg-muted">
+                  <Image src={secondaryImagePreview} alt="Secondary" fill className="object-cover" sizes="300px" />
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSecondaryImagePreview(null);
+                      setSecondaryImageFile(null);
+                      if (article?.secondaryImage?.url) setRemoveSecondaryImage(true);
+                    }}
+                    className="absolute top-2 right-2 bg-black/70 hover:bg-black text-white rounded-full p-1 transition-colors"
+                    aria-label="Remove secondary image"
+                    title="Remove image"
+                  >
+                    <X className="h-3.5 w-3.5" />
+                  </button>
+                </div>
+              ) : (
+                <div className="aspect-video rounded-lg border-2 border-dashed flex flex-col items-center justify-center bg-muted/20 text-muted-foreground gap-1.5">
+                  <ImageIcon className="h-7 w-7 text-muted-foreground/60" />
+                  <span className="text-xs">No secondary image selected</span>
+                </div>
+              )}
+              <label className="cursor-pointer block">
+                <Button type="button" variant="outline" size="sm" className="w-full" asChild>
+                  <span>
+                    <Upload className="h-4 w-4" />
+                    {secondaryImagePreview ? 'Change Secondary Image' : 'Add Secondary Image'}
+                  </span>
+                </Button>
+                <input type="file" accept="image/*" className="hidden" onChange={handleSecondaryImageChange} />
+              </label>
+              {isUploadingSecondaryImage && <p className="text-xs text-muted-foreground flex items-center gap-1"><Loader2 className="h-3 w-3 animate-spin" />Uploading secondary image...</p>}
             </CardContent>
           </Card>
 

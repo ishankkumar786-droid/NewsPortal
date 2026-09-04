@@ -80,6 +80,8 @@ export const UpdateArticleSchema = z.object({
     seoTitle: z.string().max(70).optional(),
     seoDescription: z.string().max(160).optional(),
     scheduledDate: z.string().datetime().optional().nullable(),
+    removeFeaturedImage: z.boolean().optional(),
+    removeSecondaryImage: z.boolean().optional(),
   }),
 });
 

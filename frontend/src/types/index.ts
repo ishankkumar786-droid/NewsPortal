@@ -82,7 +82,10 @@ export interface Article {
   tags: string[];
   author: User;
   featuredImage?: FeaturedImage;
+  secondaryImage?: FeaturedImage;
   galleryImages: GalleryImage[];
+  likes: string[];
+  likeCount: number;
   videoUrl?: string;
   status: ArticleStatus;
   isBreaking: boolean;
@@ -102,6 +105,20 @@ export interface Article {
   canonicalUrl?: string;
   viewCount: number;
   shareCount: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// ===========================
+// COMMENT TYPES
+// ===========================
+
+export interface Comment {
+  _id: string;
+  article: string;
+  user: User;
+  content: string;
+  isApproved: boolean;
   createdAt: string;
   updatedAt: string;
 }

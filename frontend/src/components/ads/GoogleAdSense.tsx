@@ -52,12 +52,17 @@ export function GoogleAdSense({ slot, className = '' }: GoogleAdSenseProps) {
   const config = ADSENSE_CONFIG[slot];
 
   useEffect(() => {
-    // Push to AdSense queue
+    // Only attempt AdSense push in production
+    if (process.env.NODE_ENV !== 'production') return;
+
     try {
-      ((window as unknown as { adsbygoogle: unknown[] }).adsbygoogle =
-        (window as unknown as { adsbygoogle: unknown[] }).adsbygoogle || []).push({});
+      if (typeof window !== 'undefined') {
+        const adsbygoogle = (window as unknown as { adsbygoogle?: unknown[] }).adsbygoogle || [];
+        (window as unknown as { adsbygoogle: unknown[] }).adsbygoogle = adsbygoogle;
+        adsbygoogle.push({});
+      }
     } catch {
-      // AdSense not loaded yet
+      // Ignore AdSense duplicate initialization or network errors
     }
   }, []);
 

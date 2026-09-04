@@ -105,20 +105,20 @@ export default async function HomePage() {
             
             <GoogleAdSense slot="HOME_MIDDLE_ADSENSE" className="my-8" />
 
-            <CategorySection categorySlug="politics" label="Politics" />
-            <CategorySection categorySlug="technology" label="Technology" />
+            <CategorySection categorySlug="politics" label="Politics" variant="main" />
+            <CategorySection categorySlug="technology" label="Technology" variant="main" />
           </div>
           
           {/* Sidebar Column (Right - 1/3) */}
-          <aside className="space-y-8">
+          <aside className="space-y-6">
             <AdBanner slot="SIDEBAR_TOP" />
             
-            <CategorySection categorySlug="business" label="Business" />
-            <CategorySection categorySlug="entertainment" label="Entertainment" />
+            <CategorySection categorySlug="business" label="Business" variant="sidebar" />
+            <CategorySection categorySlug="entertainment" label="Entertainment" variant="sidebar" />
 
             <GoogleAdSense slot="SIDEBAR_ADSENSE" />
             
-            <CategorySection categorySlug="crime" label="Crime" />
+            <CategorySection categorySlug="crime" label="Crime" variant="sidebar" />
           </aside>
         </div>
         {/* Full width sections below */}
@@ -127,11 +127,11 @@ export default async function HomePage() {
         <AdBanner slot="HOME_BOTTOM" className="my-8" />
         
         <div className="mt-12">
-          <CategorySection categorySlug="sports" label="Sports" />
+          <CategorySection categorySlug="sports" label="Sports" variant="full" />
         </div>
 
         <div className="mt-12">
-          <CategorySection categorySlug="others" label="Others" />
+          <CategorySection categorySlug="others" label="Others" variant="full" />
         </div>
 
         <PhotoGallery articles={latestArticles.filter((a: any) => a.featuredImage?.url)} />

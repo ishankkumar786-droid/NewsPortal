@@ -33,6 +33,14 @@ export interface IArticle extends Document {
     alt?: string;
     caption?: string;
   };
+  secondaryImage?: {
+    url: string;
+    publicId: string;
+    alt?: string;
+    caption?: string;
+  };
+  likes: mongoose.Types.ObjectId[];
+  likeCount: number;
   galleryImages: IGalleryImage[];
   videoUrl?: string;
   status: ArticleStatus;
@@ -116,6 +124,17 @@ const ArticleSchema = new Schema<IArticle>(
       publicId: { type: String },
       alt: { type: String, maxlength: 200 },
       caption: { type: String, maxlength: 500 },
+    },
+    secondaryImage: {
+      url: { type: String },
+      publicId: { type: String },
+      alt: { type: String, maxlength: 200 },
+      caption: { type: String, maxlength: 500 },
+    },
+    likes: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+    likeCount: {
+      type: Number,
+      default: 0,
     },
     galleryImages: [
       {

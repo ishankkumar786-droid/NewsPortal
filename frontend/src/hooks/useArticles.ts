@@ -242,3 +242,39 @@ export const useUploadFeaturedImage = () => {
     },
   });
 };
+
+export const useUploadSecondaryImage = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({ articleId, file }: { articleId: string; file: File }) => {
+      const formData = new FormData();
+      formData.append('image', file);
+      const res = await api.post(`/articles/${articleId}/secondary-image`, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+      return res.data;
+    },
+    onSuccess: (_, { articleId }) => {
+      queryClient.invalidateQueries({ queryKey: ['article', articleId] });
+      queryClient.invalidateQueries({ queryKey: ['articles'] });
+      queryClient.invalidateQueries({ queryKey: ['articles-infinite'] });
+      queryClient.invalidateQueries({ queryKey: ['article-slug'] });
+    },
+  });
+};
+
+export const useToggleLike = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({ articleId, direction }: { articleId: string; direction: 'like' | 'unlike' }) => {
+      const res = await api.post<{ data: { article: Article } }>(`/articles/${articleId}/like`, { direction });
+      return res.data.data!.article;
+    },
+    onSuccess: (updatedArticle, { articleId }) => {
+      queryClient.setQueryData(['article', articleId], updatedArticle);
+      queryClient.invalidateQueries({ queryKey: ['article-slug'] });
+    },
+  });
+};

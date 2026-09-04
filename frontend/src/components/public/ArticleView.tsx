@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { formatDate } from '@/lib/utils';
@@ -6,6 +8,9 @@ import { AdBanner } from '@/components/ads/AdBanner';
 import { GoogleAdSense } from '@/components/ads/GoogleAdSense';
 import { Eye, Clock } from 'lucide-react';
 import { ShareButton } from '@/components/public/ShareButton';
+import { LikeButton } from '@/components/public/LikeButton';
+import { CommentSection } from '@/components/public/CommentSection';
+import { ArticleImageSlider } from '@/components/public/ArticleImageSlider';
 
 // Minimal shape of the article fields this component reads.
 interface ArticleViewArticle {
@@ -31,6 +36,12 @@ interface ArticleViewArticle {
     alt?: string;
     caption?: string;
   } | null;
+  secondaryImage?: {
+    url?: string;
+    alt?: string;
+    caption?: string;
+  } | null;
+  likeCount?: number;
 }
 
 interface ArticleViewProps {
@@ -40,6 +51,11 @@ interface ArticleViewProps {
 }
 
 export function ArticleView({ article, articleUrl, isPreview = false }: ArticleViewProps) {
+  const articleImages = [
+    ...(article.featuredImage?.url ? [article.featuredImage] : []),
+    ...(article.secondaryImage?.url ? [article.secondaryImage] : []),
+  ];
+
   return (
     <article
       className="container mx-auto px-4 py-8"
@@ -140,6 +156,9 @@ export function ArticleView({ article, articleUrl, isPreview = false }: ArticleV
           </div>
 
           <div className="flex items-center gap-3 text-sm text-muted-foreground ml-auto flex-wrap">
+            {article._id && (
+              <LikeButton articleId={article._id} initialLikeCount={article.likeCount || 0} />
+            )}
             <span className="flex items-center gap-1">
               <Clock className="h-3.5 w-3.5" />
               <time dateTime={article.publishDate} itemProp="datePublished">
@@ -153,32 +172,8 @@ export function ArticleView({ article, articleUrl, isPreview = false }: ArticleV
           </div>
         </div>
 
-        {/* Featured Image */}
-        {article.featuredImage?.url && (
-          <figure
-            className="mb-6"
-            itemProp="image"
-            itemScope
-            itemType="https://schema.org/ImageObject"
-          >
-            <div className="relative aspect-video rounded-xl overflow-hidden">
-              <Image
-                src={article.featuredImage.url}
-                alt={article.featuredImage.alt || article.title}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 768px"
-                priority
-                itemProp="url"
-              />
-            </div>
-            {article.featuredImage.caption && (
-              <figcaption className="text-sm text-muted-foreground text-center mt-2">
-                {article.featuredImage.caption}
-              </figcaption>
-            )}
-          </figure>
-        )}
+        {/* Article Image Slider (Primary Cover + Secondary) */}
+        <ArticleImageSlider images={articleImages} articleTitle={article.title} />
 
         {/* Article Content */}
         <AdBanner slot="ARTICLE_TOP" className="mb-6" />
@@ -241,6 +236,13 @@ export function ArticleView({ article, articleUrl, isPreview = false }: ArticleV
             >
               View all articles →
             </Link>
+          </div>
+        )}
+
+        {/* Comments Section */}
+        {article._id && (
+          <div className="mt-12">
+            <CommentSection articleId={article._id} />
           </div>
         )}
       </div>
