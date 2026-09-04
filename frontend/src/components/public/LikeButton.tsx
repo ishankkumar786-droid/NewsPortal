@@ -37,12 +37,21 @@ export function LikeButton({ articleId, initialLikeCount }: LikeButtonProps) {
 
   // Hydrate from localStorage after mount (avoids SSR mismatch)
   useEffect(() => {
-    setHasLiked(getLikedArticles().has(articleId));
-  }, [articleId]);
+    const isLiked = getLikedArticles().has(articleId);
+    setHasLiked(isLiked);
+    if (isLiked && initialLikeCount === 0) {
+      setLikeCount((prev) => (prev === 0 ? 1 : prev));
+    }
+  }, [articleId, initialLikeCount]);
 
   useEffect(() => {
-    setLikeCount(initialLikeCount);
-  }, [initialLikeCount]);
+    const isLiked = getLikedArticles().has(articleId);
+    if (isLiked && initialLikeCount === 0) {
+      setLikeCount(1);
+    } else {
+      setLikeCount(initialLikeCount);
+    }
+  }, [initialLikeCount, articleId]);
 
   const handleLike = useCallback(() => {
     const newHasLiked = !hasLiked;
@@ -64,6 +73,11 @@ export function LikeButton({ articleId, initialLikeCount }: LikeButtonProps) {
     toggleLike(
       { articleId, direction },
       {
+        onSuccess: (updatedArticle) => {
+          if (updatedArticle && typeof updatedArticle.likeCount === 'number') {
+            setLikeCount(updatedArticle.likeCount);
+          }
+        },
         onError: (err) => {
           // Revert on error
           setHasLiked(!newHasLiked);

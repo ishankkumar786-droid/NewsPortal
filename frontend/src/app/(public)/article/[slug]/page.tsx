@@ -11,7 +11,7 @@ async function getArticle(slug: string) {
   try {
     const url = `${process.env.SERVER_API_URL || 'http://localhost:5000/api/v1'}/articles/slug/${slug}`;
     const res = await fetch(url, {
-      next: { revalidate: 300 }, // Revalidate every 5 minutes
+      cache: 'no-store',
     });
 
     if (!res.ok) {

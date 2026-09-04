@@ -188,8 +188,7 @@ export const getArticleById = async (
     // Increment view count (non-blocking)
     Article.findByIdAndUpdate(id, { $inc: { viewCount: 1 } }).exec().catch(() => {});
 
-    const isPublic = !req.user || req.user.role === 'visitor';
-    sendSuccess(res, { article }, 'Article retrieved successfully', 200, undefined, isPublic ? { public: 300 } : undefined);
+    sendSuccess(res, { article }, 'Article retrieved successfully', 200);
   } catch (error) {
     next(error);
   }
@@ -228,8 +227,7 @@ export const getArticleBySlug = async (
       Article.findByIdAndUpdate(article._id, { $inc: { viewCount: 1 } }).exec().catch(() => {});
     }
 
-    const isPublic = !req.user || req.user.role === 'visitor';
-    sendSuccess(res, { article }, 'Article retrieved successfully', 200, undefined, isPublic ? { public: 300 } : undefined);
+    sendSuccess(res, { article }, 'Article retrieved successfully', 200);
   } catch (error) {
     next(error);
   }
